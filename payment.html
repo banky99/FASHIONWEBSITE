@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Payment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Payment Page</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="request.html">Request a Design</a></li>
+                <li><a href="payment.html">Make a Payment</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Complete Your Payment</h2>
+            <form id="paymentForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="amount">Amount ($):</label>
+                <input type="number" id="amount" name="amount" required>
+
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment_method" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="bank_transfer">Bank Transfer</option>
+                </select>
+
+                <button type="submit">Pay Now</button>
+            </form>
+            <p id="paymentConfirmation" style="display:none; color: green;">Your payment has been processed successfully!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fashion Design Store. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // JavaScript for payment validation and confirmation
+        const paymentForm = document.getElementById('paymentForm');
+        const paymentConfirmation = document.getElementById('paymentConfirmation');
+
+        paymentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Simple validation: Ensure no fields are empty
+            let isValid = true;
+            const formData = new FormData(paymentForm);
+            for (let value of formData.values()) {
+                if (!value.trim()) {
+                    isValid = false;
+                    alert('Please fill out all fields');
+                    break;
+                }
+            }
+
+            if (isValid) {
+                // Show payment confirmation message
+                paymentConfirmation.style.display = 'block';
+
+                // Reset the form
+                paymentForm.reset();
+
+                // Hide payment confirmation after 3 seconds
+                setTimeout(() => {
+                    paymentConfirmation.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

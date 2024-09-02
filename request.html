@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Design</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Request a Custom Design</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="request.html">Request a Design</a></li>
+                <li><a href="payment.html">Make a Payment</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Fill Out Your Clothing Details and Measurements</h2>
+            <form id="designRequestForm">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="clothing-type">Clothing Type:</label>
+                <input type="text" id="clothing-type" name="clothing_type" required>
+
+                <h3>Measurements:</h3>
+                <label for="bust">Bust (inches):</label>
+                <input type="number" id="bust" name="bust" required>
+                
+                <label for="waist">Waist (inches):</label>
+                <input type="number" id="waist" name="waist" required>
+                
+                <label for="hips">Hips (inches):</label>
+                <input type="number" id="hips" name="hips" required>
+                
+                <label for="length">Length (inches):</label>
+                <input type="number" id="length" name="length" required>
+
+                <label for="additional-info">Additional Information:</label>
+                <textarea id="additional-info" name="additional_info" rows="4"></textarea>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Submit Request</button>
+            </form>
+            <p id="confirmationMessage" style="display:none; color: green;">Your design request has been submitted successfully!</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Fashion Design Store. All Rights Reserved.</p>
+    </footer>
+    <script>
+        // JavaScript for form validation and submission
+        const form = document.getElementById('designRequestForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Simple validation: Ensure no fields are empty
+            let isValid = true;
+            const formData = new FormData(form);
+            for (let value of formData.values()) {
+                if (!value.trim()) {
+                    isValid = false;
+                    alert('Please fill out all fields');
+                    break;
+                }
+            }
+
+            if (isValid) {
+                // Show confirmation message
+                confirmationMessage.style.display = 'block';
+
+                // Reset the form
+                form.reset();
+
+                // Hide confirmation message after 3 seconds
+                setTimeout(() => {
+                    confirmationMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
